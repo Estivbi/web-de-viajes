@@ -1,0 +1,19 @@
+---
+// src/components/Gallery.astro
+interface Props {
+  images: string[];
+}
+const { images } = Astro.props;
+---
+
+<div class="flex gap-4 overflow-x-auto py-4">
+  {images.map((image) => (
+    <img 
+      src={image} 
+      alt="Galería" 
+      class="w-64 h-48 rounded-lg object-cover shadow-sm"
+      width="256" 
+      height="192" 
+    />
+  ))}
+</div>

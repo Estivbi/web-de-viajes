@@ -1,0 +1,26 @@
+---
+// src/pages/404.astro
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Card from '../components/Card.astro';
+---
+
+<html>
+  <head>
+    <title>Página no encontrada - travel web</title>
+    <link rel="stylesheet" href="/styles/global.css" />
+  </head>
+  <body>
+    <Header />
+    <main class="grid-bento">
+      <Card span="3">
+        <h1>404</h1>
+		<h2>Oops! ¡Hola! Lo sentimos, pero no pudimos encontrar lo que buscabas. Verifica que la dirección
+			URL sea correcta.</h2>
+        <p>Página no encontrada</p>
+        <a href="/" class="button">Volver al inicio</a>
+      </Card>
+    </main>
+    <Footer />
+  </body>
+</html>

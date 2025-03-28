@@ -1,0 +1,79 @@
+---
+// src/components/Countdown.astro
+interface Props {
+  endDate: string;
+}
+const { endDate } = Astro.props;
+
+// Parseo en UTC para evitar problemas de zona horaria
+const parseUTCDate = (dateStr: string) => {
+  const [year, month, day] = dateStr.split('-');
+  return new Date(Date.UTC(Number(year), Number(month) - 1, Number(day)));
+};
+
+const eventDate = parseUTCDate(endDate);
+const formattedDate = eventDate.toLocaleDateString('es-ES', { 
+  timeZone: 'UTC',
+  weekday: 'long', 
+  day: 'numeric', 
+  month: 'long', 
+  year: 'numeric' 
+});
+---
+
+<div class="text-center space-y-4">
+  <!-- Calendario Estilizado -->
+  <div class="inline-block border-2 border-indigo-700 rounded-lg p-4 bg-white shadow-md">
+    <div class="bg-indigo-700 text-white py-1 px-6 rounded-t">
+      {eventDate.toLocaleString('es-ES', { 
+        timeZone: 'UTC',
+        month: 'long' 
+      }).toUpperCase()}
+    </div>
+    <div class="text-5xl font-bold text-indigo-700 py-2">
+      {eventDate.getUTCDate()}
+    </div>
+    <div class="text-sm text-gray-600">
+      {eventDate.toLocaleString('es-ES', {
+        timeZone: 'UTC',
+        weekday: 'short' 
+      })}
+    </div>
+  </div>
+
+  <!-- Contador de días -->
+  <p id="countdown" class="text-xl text-indigo-700 font-semibold"></p>
+
+  <!-- Fecha completa -->
+  <p class="text-gray-700">{formattedDate}</p>
+
+  <script>
+    // Usar fecha UTC en el cliente también
+    const endDateUTC = new Date(Date.UTC(2025, 3, 14)); // Abril = 3 (0-indexed)
+    const end = endDateUTC.getTime();
+    
+    const countdownElement = document.getElementById('countdown');
+    
+    const updateCountdown = () => {
+      const nowUTC = Date.now();
+      const distance = end - nowUTC;
+      
+      if (distance < 0) {
+        if (countdownElement) {
+          countdownElement.textContent = "¡El viaje ha comenzado!";
+        }
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      if (countdownElement) {
+        countdownElement.textContent = `Faltan ${days} días`;
+      }
+    };
+
+    if (countdownElement) {
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+  </script>
+</div>
