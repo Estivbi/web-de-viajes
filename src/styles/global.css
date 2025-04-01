@@ -6,3 +6,26 @@
 body {
   font-family: 'Inter', sans-serif;
 }
+
+/* Efectos hover para interactividad */
+footer a,
+footer li {
+  transition: all 0.3s ease;
+}
+
+footer li:hover {
+  transform: translateX(4px);
+  opacity: 0.9;
+}
+
+/* moviles */
+@media (max-width: 640px) {
+  .week-grid-container {
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scroll-snap-type: x mandatory;
+  }
+  .week-day {
+    min-width: 3.5rem;
+  }
+}
