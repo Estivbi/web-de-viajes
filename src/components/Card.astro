@@ -1,13 +1,28 @@
 ---
 // src/components/Card.astro
-
-// src/components/Card.astro
 interface Props {
   class?: string;
+  noPadding?: boolean;
 }
-const { class: className } = Astro.props;
+const { class: className = '', noPadding = false } = Astro.props;
 ---
 
-<div class={`rounded-xl shadow-sm ${className || ''}`}>
+<div 
+  class={`rounded-xl bg-gradient-to-br from-gray-50 to-indigo-50 border border-indigo-100 shadow-md ${
+    noPadding ? '' : 'p-5'
+  } ${className}`}
+>
   <slot />
 </div>
+
+<style>
+  .card-hover {
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(79, 70, 229, 0.1);
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+    border-color: rgba(165, 180, 252, 0.5);
+  }
+</style>
