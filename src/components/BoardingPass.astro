@@ -1,0 +1,237 @@
+---
+// components/BoardingPass.astro
+interface Props {
+  name: string;
+  destination: string;
+  date: string;
+  flight?: string;
+  seat?: string;
+}
+
+const { name, destination, date, flight = "XY123", seat = "12A" } = Astro.props;
+
+// Create a second passenger for the stacking effect
+const secondPassenger = {
+  name: "Alejandro",
+  seat: seat === "7A" ? "7B" : (parseInt(seat.replace(/\D/g, '')) + 1) + seat.replace(/\d/g, '')
+};
+
+// Extract origin from destination (assuming format "City, Country")
+const destinationCity = destination.split(',')[0];
+const origin = "Madrid";
+---
+
+<div class="relative w-full mx-auto">
+  <div id="passes-container" class="relative flex justify-center transition-all duration-500">
+    <!-- Primary Boarding Pass -->
+    <div id="primary-pass" class="relative z-10 bg-gradient-to-br from-[#233D7B] to-[#1A2F5E] text-white rounded-lg overflow-hidden shadow-xl border border-[#3A5998] h-[180px] w-full max-w-[500px] flex transition-transform duration-500">
+      <!-- Header Bar -->
+      <div class="absolute top-0 left-0 right-0 h-10 bg-[#0F1E3C] flex items-center px-4 border-b border-[#A7BFFC]/30">
+        <div class="flex items-center gap-2">
+          <span class="transform rotate-45 text-lg">✈️</span>
+          <span class="font-bold text-sm">Boarding Pass</span>
+        </div>
+        <div class="bg-[#E84C3D] px-3 py-1 rounded-full text-xs font-bold ml-auto">
+          {seat}
+        </div>
+      </div>
+      
+      <!-- Left Section with Passenger Info -->
+      <div class="w-[100px] flex flex-col items-start justify-center p-3 border-r border-dashed border-[#A7BFFC]/30 mt-10">
+        <div class="w-full">
+          <p class="text-[10px] text-[#A7BFFC] mb-0.5">Passenger</p>
+          <p class="font-bold text-sm truncate">{name}</p>
+        </div>
+      </div>
+      
+      <!-- Middle Section with Route -->
+      <div class="flex-1 flex flex-col justify-center p-3 mt-10">
+        <div class="flex justify-between items-center">
+          <div class="text-center">
+            <p class="text-xl font-bold">MAD</p>
+            <p class="text-[10px] text-[#A7BFFC]">{origin}</p>
+          </div>
+          
+          <div class="flex-1 px-2 relative">
+            <div class="border-t border-dashed border-[#A7BFFC]/50 w-full"></div>
+            <span class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-45 bg-[#233D7B] p-0.5 text-sm">✈️</span>
+          </div>
+          
+          <div class="text-center">
+            <p class="text-xl font-bold">EDI</p>
+            <p class="text-[10px] text-[#A7BFFC]">{destinationCity}</p>
+          </div>
+        </div>
+        
+        <div class="flex justify-between text-xs mt-2">
+          <div>
+            <p class="text-[10px] text-[#A7BFFC] mb-0.5">Flight</p>
+            <p class="font-bold">{flight}</p>
+          </div>
+          <div>
+            <p class="text-[10px] text-[#A7BFFC] mb-0.5">Date</p>
+            <p class="font-bold">{date}</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Section with Details -->
+      <div class="w-[80px] flex flex-col justify-center p-3 border-l border-dashed border-[#A7BFFC]/30 mt-10">
+        <div class="mb-3">
+          <p class="text-[10px] text-[#A7BFFC] mb-0.5">Gate</p>
+          <p class="font-bold text-sm">22</p>
+        </div>
+        
+        <div>
+          <p class="text-[10px] text-[#A7BFFC] mb-0.5">Boarding</p>
+          <p class="font-bold text-sm">10:45</p>
+        </div>
+      </div>
+      
+      <!-- Footer with tartan pattern -->
+      <div class="absolute bottom-0 left-0 right-0 h-8 bg-[#0F1E3C] overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-tartan"></div>
+      </div>
+    </div>
+    
+    <!-- Secondary Boarding Pass -->
+    <div id="secondary-pass" class="absolute top-0 right-0 z-0 bg-gradient-to-br from-[#233D7B] to-[#1A2F5E] text-white rounded-lg overflow-hidden shadow-xl border border-[#3A5998] h-[180px] w-full max-w-[500px] flex opacity-0 transition-all duration-500">
+      <!-- Header Bar -->
+      <div class="absolute top-0 left-0 right-0 h-10 bg-[#0F1E3C] flex items-center px-4 border-b border-[#A7BFFC]/30">
+        <div class="flex items-center gap-2">
+          <span class="transform rotate-45 text-lg">✈️</span>
+          <span class="font-bold text-sm">Boarding Pass</span>
+        </div>
+        <div class="bg-[#E84C3D] px-3 py-1 rounded-full text-xs font-bold ml-auto">
+          {secondPassenger.seat}
+        </div>
+      </div>
+      
+      <!-- Left Section with Passenger Info -->
+      <div class="w-[100px] flex flex-col items-start justify-center p-3 border-r border-dashed border-[#A7BFFC]/30 mt-10">
+        <div class="w-full">
+          <p class="text-[10px] text-[#A7BFFC] mb-0.5">Passenger</p>
+          <p class="font-bold text-sm truncate">{secondPassenger.name}</p>
+        </div>
+      </div>
+      
+      <!-- Middle Section with Route -->
+      <div class="flex-1 flex flex-col justify-center p-3 mt-10">
+        <div class="flex justify-between items-center">
+          <div class="text-center">
+            <p class="text-xl font-bold">MAD</p>
+            <p class="text-[10px] text-[#A7BFFC]">{origin}</p>
+          </div>
+          
+          <div class="flex-1 px-2 relative">
+            <div class="border-t border-dashed border-[#A7BFFC]/50 w-full"></div>
+            <span class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-45 bg-[#233D7B] p-0.5 text-sm">✈️</span>
+          </div>
+          
+          <div class="text-center">
+            <p class="text-xl font-bold">EDI</p>
+            <p class="text-[10px] text-[#A7BFFC]">{destinationCity}</p>
+          </div>
+        </div>
+        
+        <div class="flex justify-between text-xs mt-2">
+          <div>
+            <p class="text-[10px] text-[#A7BFFC] mb-0.5">Flight</p>
+            <p class="font-bold">{flight}</p>
+          </div>
+          <div>
+            <p class="text-[10px] text-[#A7BFFC] mb-0.5">Date</p>
+            <p class="font-bold">{date}</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Section with Details -->
+      <div class="w-[80px] flex flex-col justify-center p-3 border-l border-dashed border-[#A7BFFC]/30 mt-10">
+        <div class="mb-3">
+          <p class="text-[10px] text-[#A7BFFC] mb-0.5">Gate</p>
+          <p class="font-bold text-sm">22</p>
+        </div>
+        
+        <div>
+          <p class="text-[10px] text-[#A7BFFC] mb-0.5">Boarding</p>
+          <p class="font-bold text-sm">10:45</p>
+        </div>
+      </div>
+      
+      <!-- Footer with tartan pattern -->
+      <div class="absolute bottom-0 left-0 right-0 h-8 bg-[#0F1E3C] overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-tartan"></div>
+      </div>
+    </div>
+  </div>
+  
+  <button id="toggle-passes" class="block mx-auto mt-4 bg-[#233D7B] text-white border-none rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-colors hover:bg-[#1A2F5E]">
+    Ver ambos billetes
+  </button>
+</div>
+
+<script>
+  // Client-side JavaScript for the toggle functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.getElementById('toggle-passes');
+    const primaryPass = document.getElementById('primary-pass');
+    const secondaryPass = document.getElementById('secondary-pass');
+    const passesContainer = document.getElementById('passes-container');
+    let expanded = false;
+    
+    if (toggleButton) {
+      toggleButton.addEventListener('click', () => {
+      expanded = !expanded;
+      
+      if (expanded) {
+        // Calculate 45% of the primary pass width for the shift
+        const shiftAmount = primaryPass ? primaryPass.offsetWidth * 0.45 : 0;
+        
+        // Move primary pass to the left
+        if (primaryPass) {
+          primaryPass.style.transform = `translateX(-${shiftAmount}px)`;
+        }
+        
+        // Show secondary pass and position it
+        if (secondaryPass) {
+          secondaryPass.style.opacity = '1';
+          secondaryPass.style.transform = 'translateX(0)';
+        }
+        
+        toggleButton.textContent = 'Colapsar billetes';
+      } else {
+        // Reset positions
+        if (primaryPass) {
+          primaryPass.style.transform = 'translateX(0)';
+        }
+        if (secondaryPass) {
+          secondaryPass.style.opacity = '0';
+          secondaryPass.style.transform = 'translateX(100%)';
+        }
+        
+        toggleButton.textContent = 'Ver ambos billetes';
+      };
+
+    })
+
+    }});
+
+</script>
+
+<style>
+  /* Custom styles that can't be easily done with Tailwind */
+  .bg-tartan {
+    background-image: repeating-linear-gradient(
+      45deg, 
+      #E84C3D 0, 
+      #E84C3D 10px, 
+      transparent 10px, 
+      transparent 20px, 
+      #233D7B 20px, 
+      #233D7B 30px, 
+      transparent 30px, 
+      transparent 40px
+    );
+  }
+</style>

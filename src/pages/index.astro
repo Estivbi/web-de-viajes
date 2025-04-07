@@ -1,16 +1,22 @@
 ---
 import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import Card from '../components/Card.astro';
-import Countdown from '../components/Countdown.astro';
 import Gallery from '../components/Gallery.astro';
 import Layout from '../layouts/Layout.astro';
-import '../styles/global.css';
+import WeeklyCalendar from '../components/WeeklyCalendar.astro';
+import DayActivities from '../components/DayActivities.astro';
+import BoardingPass from '../components/BoardingPass.astro';
 
 const tripData = {
   destination: "Edimburgo, Escocia",
   dates: "14-18 abril 2025",
-  activities: ["Castillo de Edimburgo", "Royal Mile", "Arthur's Seat", "Whisky Tour"],
+  activities: {
+    "2025-04-14": ["Check-in Hotel", "Visita Castillo de Edimburgo", "Cena de bienvenida"],
+    "2025-04-15": ["Tour Royal Mile", "Visita Catedral St Giles", "Degustación whisky"],
+    "2025-04-16": ["Excursión Arthur's Seat", "Museo Nacional"],
+    "2025-04-17": ["Tour fantasmas", "Tiempo libre"],
+    "2025-04-18": ["Check-out", "Visita última hora"]
+  },
   images: ["img/royal-mile.webp", "img/edinburgh-castle.webp"]
 };
 ---
@@ -23,35 +29,48 @@ const tripData = {
 	  <div class="grid grid-cols-1 md:grid-cols-4 gap-6"> <!-- 4 columnas en desktop -->
 		
 		<!-- Sección Destino (ocupa 3 cols) -->
-		<Card class="md:col-span-3 bg-gray-900 text-white p-6">
-		  <h1 class="text-3xl font-bold text-indigo-300">{tripData.destination}</h1>
-		  <img 
-			src="/edinburgh-hero.jpg" 
-			alt={tripData.destination} 
-			class="mt-4 rounded-xl w-full h-48 object-cover border-2 border-blue-100/50"
-		  />
-		</Card>
+		<Card class="md:col-span-3 bg-gray-900 text-white p-6 flex flex-col items-center relative overflow-hidden">
+			<!-- Background image -->
+			<div class="absolute inset-0 opacity-20 bg-cover bg-center" style="background-image: url('/img/edinburh-skyline.webp');"></div>
+			
+			<!-- Content -->
+			<h1 class="text-3xl font-bold text-indigo-300 mb-4 relative z-10">Tu billete a {tripData.destination}</h1>
+			<div class="relative z-10 w-full flex justify-center">
+			  <BoardingPass 
+				name="Carolina" 
+				destination={tripData.destination} 
+				date={tripData.dates} 
+				flight="CR29"
+				seat="7A"
+			  />
+			</div>
+		  </Card>
   
-		<!-- Countdown (ocupa 1 col, altura ajustable) -->
-		<Card class="md:row-span-2 bg-blue-100/50 p-6 flex flex-col justify-center"> <!-- Flex para centrar verticalmente -->
-		  <Countdown endDate="2025-04-14" />
+		<!-- Actividades del día (nueva posición) -->
+		<Card class="bg-white p-4 border border-gray-200 h-fit sticky top-4">
+			<DayActivities activities={tripData.activities} />
 		</Card>
-  
-		<!-- Activities (ocupa 3 cols, altura compacta) -->
-		<Card class="md:col-span-3 bg-white p-4 border border-gray-200">
-		  <h2 class="text-xl font-semibold text-indigo-700 mb-3">Actividades</h2>
-		  <ul class="flex flex-wrap gap-2"> <!-- Lista horizontal compacta -->
-			{tripData.activities.map((activity) => (
-			  <li class="bg-gray-100 px-3 py-2 rounded-lg text-gray-700 text-sm">
-				{activity}
-			  </li>
-			))}
-		  </ul>
+
+		<!-- Calendario Semanal Interactivo -->
+		<Card class="md:col-span-3 bg-blue-100/50 p-6">
+			<WeeklyCalendar 
+			startDate="2025-04-14" 
+			endDate="2025-04-18"
+			activities={tripData.activities}
+			/>
 		</Card>
   
 		<!-- Galería (ocupa 4 cols) -->
 		<Card class="col-span-full bg-white p-6 border border-gray-200">
 		  <Gallery images={tripData.images} />
+		</Card>
+		<!-- Mapa de Google -->
+		<Card class="col-span-full bg-white p-6 border border-gray-200">
+			<h2 class="text-xl font-semibold text-indigo-700 mb-3">Mapa de los sitios</h2>
+			<iframe src="https://www.google.com/maps/d/embed?mid=1oBfiGAPEWxEZedO5HR_haLiKzccDUNY&ehbc=2E312F" 
+					width="640" 
+					height="480">
+			</iframe>
 		</Card>
 	  </div>
 	</main>
