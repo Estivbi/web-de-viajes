@@ -1,89 +1,118 @@
 ---
-import Header from '../components/Header.astro';
-import Card from '../components/Card.astro';
-import Gallery from '../components/Gallery.astro';
-import Layout from '../layouts/Layout.astro';
-import WeeklyCalendar from '../components/WeeklyCalendar.astro';
-import DayActivities from '../components/DayActivities.astro';
-import BoardingPass from '../components/BoardingPass.astro';
+import Header from "../components/Header.astro";
+import Card from "../components/Card.astro";
+import Gallery from "../components/Gallery.astro";
+import Layout from "../layouts/Layout.astro";
+import WeeklyCalendar from "../components/WeeklyCalendar.astro";
+import DayActivities from "../components/DayActivities.astro";
+import BoardingPass from "../components/BoardingPass.astro";
 
 const tripData = {
   destination: "Edimburgo, Escocia",
   dates: "14-18 abril 2025",
   activities: {
-    "2025-04-14": ["Check-in Hotel", "Visita Castillo de Edimburgo", "Cena de bienvenida"],
-    "2025-04-15": ["Tour Royal Mile", "Visita Catedral St Giles", "Degustación whisky"],
+    "2025-04-14": [
+      "Check-in Hotel",
+      "Visita Castillo de Edimburgo",
+      "Cena de bienvenida",
+    ],
+    "2025-04-15": [
+      "Tour Royal Mile",
+      "Visita Catedral St Giles",
+      "Degustación whisky",
+    ],
     "2025-04-16": ["Excursión Arthur's Seat", "Museo Nacional"],
     "2025-04-17": ["Tour fantasmas", "Tiempo libre"],
-    "2025-04-18": ["Check-out", "Visita última hora"]
+    "2025-04-18": ["Check-out", "Visita última hora"],
   },
-  images: ["img/royal-mile.webp", "img/edinburgh-castle.webp"]
+  images: ["img/royal-mile.webp", "img/edinburgh-castle.webp"],
 };
 ---
 
 <Layout>
-	<Header />
-  
-	<main class="container mx-auto px-4 py-8">
-	  <!-- Grid principal -->
-	  <div class="grid grid-cols-1 md:grid-cols-4 gap-6"> <!-- 4 columnas en desktop -->
-		
-		<!-- Sección Destino (ocupa 3 cols) -->
-		<Card class="card-hover md:col-span-3 bg-gray-900 text-white p-6 flex flex-col items-center relative overflow-hidden">
-			<!-- Background image -->
-			<div class="absolute inset-0 opacity-20 bg-cover bg-center" style="background-image: url('/img/edinburh-skyline.webp');"></div>
-			
-			<!-- Content -->
-			<h1 class="text-3xl font-semibold text-indigo-700 mb-3">Tu billete a {tripData.destination}</h1>
-			<div class="relative z-10 w-full flex justify-center">
-			  <BoardingPass 
-				name="Carolina" 
-				destination={tripData.destination} 
-				date={tripData.dates} 
-				flight="CR29"
-				seat="7A"
-			  />
-			</div>
-		  </Card>
-  
-		<!-- Actividades del día (nueva posición) -->
-		<Card class="card-hover bg-white p-4 border border-gray-200 h-fit sticky top-4">
-			<DayActivities activities={tripData.activities} />
-		</Card>
+  <Header />
 
-		<!-- Calendario Semanal Interactivo -->
-		<Card class="card-hover md:col-span-3 bg-blue-100/50 p-6">
-			<WeeklyCalendar 
-			startDate="2025-04-14" 
-			endDate="2025-04-18"
-			activities={tripData.activities}
-			/>
-		</Card>
-  
-		<!-- Galería (ocupa 4 cols) -->
-		<Card class="card-hover col-span-full bg-white p-6 border border-gray-200">
-			<h2 class="text-xl font-semibold text-indigo-700 mb-3">Galería de imágenes</h2>
-		  <Gallery images={tripData.images} />
-		</Card>
-		<!-- Mapa de Google -->
-		<Card class="card-hover col-span-full bg-white p-6 border border-gray-200">
-			<h2 class="text-xl font-semibold text-indigo-700 mb-3">Mapa de los sitios</h2>
-			<div class="flex flex-wrap gap-4">
-				<iframe 
-				  src="https://www.google.com/maps/d/embed?mid=1oBfiGAPEWxEZedO5HR_haLiKzccDUNY&ehbc=2E312F" 
-				  width="100%" 
-				  height="480" 
-				  class="flex-1 border rounded-lg">
-				</iframe>
-				<iframe 
-				  src="https://www.google.com/maps/d/embed?mid=1YUBrrEHA4pX1AEem3a2vsoBNjG4wrtc&ehbc=2E312F" 
-				  width="100%" 
-				  height="480" 
-				  class="flex-1 border rounded-lg">
-				</iframe>
-			  </div>
-		</Card>
-	  </div>
-	</main>
-  
-  </Layout>
+  <main class="container mx-auto px-4 py-8">
+    <!-- Grid principal -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <!-- 4 columnas en desktop -->
+
+      <!-- Sección Destino (ocupa 3 cols) -->
+      <Card
+        class="card-hover md:col-span-3 bg-gray-900 text-white p-6 flex flex-col items-center relative overflow-hidden"
+      >
+        <!-- Background image -->
+        <div
+          class="absolute inset-0 opacity-20 bg-cover bg-center"
+          style="background-image: url('/img/edinburh-skyline.webp');"
+        >
+        </div>
+
+        <!-- Content -->
+        <h1 class="text-3xl font-semibold text-indigo-700 mb-3">
+          Tu billete a {tripData.destination}
+        </h1>
+        <div class="relative z-10 w-full flex justify-center">
+          <BoardingPass
+            name="Carolina"
+            destination={tripData.destination}
+            date={tripData.dates}
+            flight="CR29"
+            seat="7A"
+          />
+        </div>
+      </Card>
+
+      <!-- Galería (al lado de la sección Destino) -->
+      <Card class="card-hover bg-white p-6 border border-gray-200 h-fit">
+        <h2 class="text-xl font-semibold text-indigo-700 mb-3">
+          Galería de imágenes
+        </h2>
+        <Gallery images={tripData.images} />
+      </Card>
+
+      <!-- Calendario Semanal Interactivo -->
+      <div class="md:col-span-2">
+        <Card class="card-hover bg-blue-100/50 p-4 max-w-lg">
+          <WeeklyCalendar
+            startDate="2025-04-14"
+            endDate="2025-04-18"
+            activities={tripData.activities}
+          />
+        </Card>
+      </div>
+
+      <!-- Actividades del día -->
+      <div>
+        <Card class="card-hover bg-white p-4 border border-gray-200 h-fit">
+          <DayActivities activities={tripData.activities} />
+        </Card>
+      </div>
+
+      <!-- Mapa de Google -->
+      <Card
+        class="card-hover col-span-full bg-white p-6 border border-gray-200"
+      >
+        <h2 class="text-xl font-semibold text-indigo-700 mb-3">
+          Mapa de los sitios
+        </h2>
+        <div class="flex flex-wrap gap-4">
+          <iframe
+            src="https://www.google.com/maps/d/embed?mid=1oBfiGAPEWxEZedO5HR_haLiKzccDUNY&ehbc=2E312F"
+            width="100%"
+            height="480"
+            class="flex-1 border rounded-lg"
+          >
+          </iframe>
+          <iframe
+            src="https://www.google.com/maps/d/embed?mid=1YUBrrEHA4pX1AEem3a2vsoBNjG4wrtc&ehbc=2E312F"
+            width="100%"
+            height="480"
+            class="flex-1 border rounded-lg"
+          >
+          </iframe>
+        </div>
+      </Card>
+    </div>
+  </main>
+</Layout>
