@@ -20,15 +20,15 @@ const days = Array.from({ length: 5 }, (_, i) => {
     {
       days.map((date, index) => {
         const dateString = date.toISOString().split("T")[0];
-        const isFirstDay = index === 0;
         return (
           <button
-            class={`w-16 p-1 rounded-lg transition-colors text-sm ${
-              isFirstDay
+            id={`day-btn-${dateString}`}
+            class={`day-btn w-16 p-1 rounded-lg transition-colors text-sm ${
+              index === 0
                 ? "bg-indigo-700 text-white"
                 : "bg-indigo-50 hover:bg-indigo-100 text-indigo-700"
             }`}
-            onclick={`showActivities('${dateString}')`}
+            onclick={`selectDay('${dateString}')`}
           >
             <div class="text-xs font-medium">
               {date.toLocaleDateString("es-ES", { weekday: "short" })}
@@ -42,13 +42,33 @@ const days = Array.from({ length: 5 }, (_, i) => {
 </div>
 
 <script is:inline>
+  let selectedDay = "${days[0].toISOString().split('T')[0]}";
+
+  function selectDay(date) {
+    // Reset all buttons
+    document.querySelectorAll(".day-btn").forEach((btn) => {
+      btn.classList.remove("bg-indigo-700", "text-white");
+      btn.classList.add("bg-indigo-50", "text-indigo-700");
+    });
+
+    // Highlight selected day
+    const selectedBtn = document.getElementById(`day-btn-${date}`);
+    selectedBtn.classList.add("bg-indigo-700", "text-white");
+    selectedBtn.classList.remove("bg-indigo-50", "text-indigo-700");
+
+    // Show activities
+    showActivities(date);
+    selectedDay = date;
+  }
+
   function showActivities(date) {
     document.querySelectorAll(".day-activities").forEach((el) => {
       el.style.display = el.id === `activities-${date}` ? "block" : "none";
     });
   }
-  // Mostrar primer día por defecto
+
+  // Initialize with first day selected
   document.addEventListener("DOMContentLoaded", () => {
-    showActivities("${firstDay}");
+    selectDay(selectedDay);
   });
 </script>

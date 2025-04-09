@@ -6,6 +6,7 @@ import Layout from "../layouts/Layout.astro";
 import WeeklyCalendar from "../components/WeeklyCalendar.astro";
 import DayActivities from "../components/DayActivities.astro";
 import BoardingPass from "../components/BoardingPass.astro";
+import Weather from "../components/Weather.astro";
 
 const tripData = {
   destination: "Edimburgo, Escocia",
@@ -86,6 +87,13 @@ const tripData = {
       <div>
         <Card class="card-hover bg-white p-4 border border-gray-200 h-fit">
           <DayActivities activities={tripData.activities} />
+        </Card>
+      </div>
+
+        <!-- Sección Clima -->
+      <div>
+        <Card class="card-hover h-full">
+          <Weather />
         </Card>
       </div>
 
