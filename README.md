@@ -1,48 +1,78 @@
-# Astro Starter Kit: Basics
+# 🌍 Web de Viajes estilo Bento
 
-```sh
-npm create astro@latest -- --template basics
+Este proyecto es una aplicación web diseñada para planificar y visualizar itinerarios de viajes. Incluye funcionalidades como un calendario semanal interactivo, actividades diarias, una galería de imágenes, información meteorológica y mapas de los sitios a visitar.
+
+[Visita la web](https://traveo.vercel.app/)
+
+---
+
+## 🚀 Características principales
+
+- **Calendario semanal interactivo**: Selecciona un día para ver las actividades planificadas.
+- **Actividades diarias**: Las actividades se muestran en dos columnas si superan las 6, con un diseño limpio y organizado.
+- **Galería de imágenes**: Visualiza fotos destacadas de los destinos.
+- **Información meteorológica**: Consulta el clima del destino en tiempo real.
+- **Mapas de Google**: Muestra los sitios a visitar en mapas interactivos.
+- **Diseño responsivo**: Adaptado para dispositivos móviles y pantallas grandes.
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+- **Astro**: Framework para construir sitios web rápidos y modernos.
+- **Tailwind CSS**: Framework de utilidades CSS para un diseño rápido y responsivo.
+- **Google Maps**: Integración de mapas interactivos.
+- **OpenWeather API**: Para obtener información meteorológica en tiempo real.
+- **JavaScript**: Para la lógica interactiva del calendario y las actividades.
+
+---
+
+## 🧑‍💻 Cómo ejecutar el proyecto
+
+Clona el repositorio:
+
+```bash
+git clone https://github.com/Estivbi/web-de-viajes.git
+cd web-de-viajes
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+Instala las dependencias:
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+npm install
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Configura las variables de entorno:  
+Crea un archivo `.env` en la raíz del proyecto y agrega tu clave de la API de OpenWeather.
 
-## 🧞 Commands
+Inicia el servidor de desarrollo:
 
-All commands are run from the root of the project, from a terminal:
+```bash
+npm run dev
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+---
 
-## 👀 Want to learn more?
+## 📸 Capturas de pantalla
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+**Página principal**  
+<img alt="Página principal" src="https://via.placeholder.com/800x400?text=Captura+de+la+página+principal">
+
+**Calendario interactivo**  
+<img alt="Calendario interactivo" src="https://via.placeholder.com/800x400?text=Calendario+interactivo">
+
+---
+
+## 📝 Contribuciones
+
+¡Las contribuciones son bienvenidas!
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
+
+---
+
+¡Gracias por visitar este proyecto! 😊
