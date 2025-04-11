@@ -23,11 +23,11 @@ const days = Array.from({ length: 5 }, (_, i) => {
         return (
           <button
             id={`day-btn-${dateString}`}
-            class={`day-btn w-16 p-1 rounded-lg transition-colors text-sm ${
-              index === 0
-                ? "bg-indigo-700 text-white"
-                : "bg-indigo-50 hover:bg-indigo-100 text-indigo-700"
-            }`}
+            class={`day-btn w-16 p-1 rounded-lg transition-all duration-200 text-sm ${
+  index === 0
+    ? "bg-indigo-700 text-white"
+    : "bg-indigo-50 hover:bg-indigo-100 text-indigo-700"
+} hover:scale-[1.02] active:scale-95`}
             onclick={`selectDay('${dateString}')`}
           >
             <div class="text-xs font-medium">
