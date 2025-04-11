@@ -16,7 +16,9 @@ const { activities } = Astro.props;
       style="display: none;"
     >
       {activities.map(activity => (
-        <div class="bg-indigo-100 p-3 rounded-lg flex items-center">
+        <div class="bg-indigo-100 p-3 rounded-lg flex items-center"
+        data-activity-start={activity === "Excursión a las Highlands a ver el Lago Ness, vaquitas peludas y muchos paisajes bonitos" ? "2025-04-15T00:00+01:00" : undefined}
+        >
           <span class="text-indigo-700 mr-2">✓</span>
           <span class="text-gray-700">{activity}</span>
         </div>

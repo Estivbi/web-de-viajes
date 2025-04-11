@@ -13,18 +13,40 @@ const tripData = {
   dates: "14-18 abril 2025",
   activities: {
     "2025-04-14": [
+      "Vuelo a Edimburgo",
+      "Llegada a Edimburgo",
+      "Dar una vuelta por la ciudad y cena",
       "Check-in Hotel",
-      "Visita Castillo de Edimburgo",
-      "Cena de bienvenida",
     ],
     "2025-04-15": [
-      "Tour Royal Mile",
-      "Visita Catedral St Giles",
-      "Degustación whisky",
+      "Desayuno",
+      "Free Tour",
+      "Comida",
+      "Grassmarket",
+      "Escaleras de The Vennel",
+      "Cementerio Greyfriars",
+      "Catedral de St Giles",
+      "Mary King’s Close",
+      "Palacio de Holyroodhouse",
+      "Calton Hill para ver el atardecer",
+      "Tolbooth Tavern"
     ],
-    "2025-04-16": ["Excursión Arthur's Seat", "Museo Nacional"],
-    "2025-04-17": ["Tour fantasmas", "Tiempo libre"],
-    "2025-04-18": ["Check-out", "Visita última hora"],
+    "2025-04-16": [
+      "Castillo de Edimburgo", 
+      "Princes Street Gardens",
+      "Pinces Street",
+      "Scott Monument",
+      "Royal Mile",
+      "Dean Village",
+      "Comida",
+      "Degustación whisky",
+      "Arthur's Seat",
+
+    ],
+    "2025-04-17": [
+      "Excursión a las Highlands a ver el Lago Ness, vaquitas peludas y muchos paisajes bonitos"
+  ],
+    "2025-04-18": ["Check-out", "Vuelo de vuelta"],
   },
   images: ["img/royal-mile.webp", "img/edinburgh-castle.webp"],
 };
@@ -36,9 +58,8 @@ const tripData = {
   <main class="container mx-auto px-4 py-8">
     <!-- Grid principal -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-      <!-- 4 columnas en desktop -->
 
-      <!-- Sección Destino (ocupa 3 cols) -->
+      <!-- Sección Destino -->
       <Card
         class="card-hover md:col-span-3 bg-gray-900 text-white p-6 flex flex-col items-center relative overflow-hidden"
       >
@@ -64,7 +85,7 @@ const tripData = {
         </div>
       </Card>
 
-      <!-- Galería (al lado de la sección Destino) -->
+      <!-- Galería -->
       <Card class="card-hover bg-white p-6 border border-gray-200 h-fit">
         <h2 class="text-xl font-semibold text-indigo-700 mb-3">
           Galería de imágenes
@@ -84,15 +105,15 @@ const tripData = {
       </div>
 
       <!-- Actividades del día -->
-      <div>
-        <Card class="card-hover bg-white p-4 border border-gray-200 h-fit">
+      <div class="md:row-span-2"> <!-- Añade row-span para ocupar 2 filas -->
+        <Card class="card-hover bg-white p-4 border border-gray-200 h-full">
           <DayActivities activities={tripData.activities} />
         </Card>
       </div>
 
-        <!-- Sección Clima -->
-      <div>
-        <Card class="card-hover h-full">
+      <!-- Sección Clima -->
+      <div class="h-fit self-start"> <!-- Añade self-start y altura fija -->
+        <Card class="card-hover">
           <Weather />
         </Card>
       </div>
@@ -106,14 +127,14 @@ const tripData = {
         </h2>
         <div class="flex flex-wrap gap-4">
           <iframe
-            src="https://www.google.com/maps/d/embed?mid=1oBfiGAPEWxEZedO5HR_haLiKzccDUNY&ehbc=2E312F"
+            src="https://www.google.com/maps/d/embed?mid=1FpW4kBB8sBMGQtpyGMq3SzGPDVdSo_A&ehbc=2E312F"
             width="100%"
             height="480"
             class="flex-1 border rounded-lg"
           >
           </iframe>
           <iframe
-            src="https://www.google.com/maps/d/embed?mid=1YUBrrEHA4pX1AEem3a2vsoBNjG4wrtc&ehbc=2E312F"
+            src="https://www.google.com/maps/d/embed?mid=1tUotZmdo--eLKCkPc5BJqNSVKsvbA8Q&ehbc=2E312F"
             width="100%"
             height="480"
             class="flex-1 border rounded-lg"

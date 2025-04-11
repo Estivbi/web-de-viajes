@@ -62,10 +62,30 @@ const days = Array.from({ length: 5 }, (_, i) => {
   }
 
   function showActivities(date) {
-    document.querySelectorAll(".day-activities").forEach((el) => {
-      el.style.display = el.id === `activities-${date}` ? "block" : "none";
-    });
-  }
+  document.querySelectorAll(".day-activities").forEach((el) => {
+    if (el.id === `activities-${date}`) {
+      el.style.display = "block";
+
+      el.querySelectorAll("[data-activity-start]").forEach((activityEl) => {
+        const startDate = new Date(activityEl.dataset.activityStart);
+        const now = new Date();
+        
+        // Debug: Ver en consola
+        console.log('Comparando:', {
+          actividad: activityEl.textContent,
+          startDate: startDate.toLocaleString("es-ES", {timeZone: "Europe/London"}),
+          ahora: now.toLocaleString("es-ES", {timeZone: "Europe/London"}),
+          mostrar: now >= startDate
+        });
+
+        activityEl.style.display = now >= startDate ? "flex" : "none";
+      });
+      
+    } else {
+      el.style.display = "none";
+    }
+  });
+}
 
   // Initialize with first day selected
   document.addEventListener("DOMContentLoaded", () => {
