@@ -12,7 +12,7 @@ const { name, destination, date, flight = "XY123", seat = "12A" } = Astro.props;
 
 // Create a second passenger for the stacking effect
 const secondPassenger = {
-  name: "Alejandro",
+  name: "Carolina",
   seat: seat === "7A" ? "7B" : (parseInt(seat.replace(/\D/g, '')) + 1) + seat.replace(/\d/g, '')
 };
 
